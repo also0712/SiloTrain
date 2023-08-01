@@ -7,3 +7,4 @@ from editeur.STediteur import *
 pygame.init()
 ed = STediteur()
 ed.main_loop()
+#test
