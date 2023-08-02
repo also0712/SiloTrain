@@ -16,13 +16,16 @@ clock = pygame.time.Clock()
 largeur_fenetre = 1280
 hauteur_fenetre = 720
 fenetre = pygame.display.set_mode((largeur_fenetre, hauteur_fenetre))
-base_path = os.path.dirname(os.path.abspath(__file__)) + "\\assets\\grounds\\"
-#===============chargement des textures
-liste_fichier = os.listdir(base_path)
-print(liste_fichier)
+
+base_path = os.path.dirname(os.path.abspath(__file__))
+
+#===============chargement des textures grounds
+base_path_grounds = base_path + "\\assets\\grounds\\"
+liste_fichier = os.listdir(base_path_grounds)
+
 textures = {}
 for file in liste_fichier:
-    textures[file] = get_image(base_path + file ,112, 112)
+    textures[file] = get_image(base_path_grounds + file ,112, 112)
     
     
 #=============== gestion des game_mode
