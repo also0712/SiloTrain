@@ -8,10 +8,10 @@ import copy
 
 class MainMenu:
  
-    def __init__(self,fenetre,clock) :
+    def __init__(self,fenetre,clock,textures) :
         self.clock = clock
         self.fenetre = fenetre
-
+        self.textures = textures
         pygame.display.set_caption('SiloTrains - Menu')
         self.running=True
         self.pressed_keys = {}
@@ -30,6 +30,7 @@ class MainMenu:
 
 
 
-            self.fenetre.fill((0,0,50))            
+            self.fenetre.fill((0,0,50))   
+            self.fenetre.blit(self.textures["Coal1"] ,(0, 0))         
             pygame.display.flip()
             self.clock.tick(60)
