@@ -8,6 +8,7 @@ from main_menu.MainMenu import *
 
 #================initialisation pygame
 pygame.init()
+
 clock = pygame.time.Clock()
 
 #================initialisation fenetre
@@ -24,7 +25,7 @@ while running :
     game_mode = main_menu.main_loop() #la main loop du menu retour le mode de jeu
 
     if game_mode == "QUIT":
-        pygame.quit;
+        pygame.quit
         running = False
 
     if game_mode == "EDITOR":

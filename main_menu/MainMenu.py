@@ -14,7 +14,12 @@ class MainMenu:
 
         pygame.display.set_caption('SiloTrains - Menu')
         self.running=True
-        self.pressed_keys = {}
+        self.pressed_keys = {
+            1073741906 : False, #haut
+            1073741905 : False, #bas
+            1073741903 : False, #droite
+            1073741904 : False  #gauche
+        }
 
 
     def main_loop(self):
@@ -27,6 +32,8 @@ class MainMenu:
                     self.pressed_keys[event.key] = True #ajoute au dictionnaire si n'existe pas
                 elif event.type == pygame.KEYUP:
                     self.pressed_keys[event.key] = False 
+
+
 
 
 
