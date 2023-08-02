@@ -4,22 +4,22 @@ import os
 import time
 import copy
 #import commons.GetImage
-pygame.init()
-largeur_fenetre = 1280
-hauteur_fenetre = 720
-fenetre = pygame.display.set_mode((largeur_fenetre, hauteur_fenetre))
-pygame.display.set_caption('SiloTrains - Menu')
-clock = pygame.time.Clock()
 
 
+class MainMenu:
+ 
+    def __init__(self,fenetre) :
+        self.fenetre = fenetre
+        pygame.display.set_caption('SiloTrains - Menu')
+        self.running=True;
 
-class STediteur:
     def main_loop(self):
-        while True:
+        while self.running:
             for event in pygame.event.get():
                 if event.type == QUIT:
-                    pygame.quit()
-            fenetre.fill((0,0,50))
+                    return "QUIT"
+
+            self.fenetre.fill((0,0,50))
             
             pygame.display.flip()
-            clock.tick(60)
+            self.clock.tick(60)
