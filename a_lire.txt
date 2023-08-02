@@ -1,0 +1,12 @@
+
+_______________________________________________________________
+
+pour supprimer les fichier __pycache__ dans l'arborescence
+https://paulnelson.ca/posts/hiding-pycache-files-in-vscode
+
+
+
+_______________________________________________________________
+pour avoir un gitignore qui ne tiens pas compte des fichiers pycache et autres résidus
+il faut prendre un gitignore tout pret ici
+https://github.com/github/gitignore
