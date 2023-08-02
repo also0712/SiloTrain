@@ -9,6 +9,7 @@ from main_menu.MainMenu import *
 
 #================initialisation pygame
 pygame.init()
+
 clock = pygame.time.Clock()
 
 #================initialisation fenetre
