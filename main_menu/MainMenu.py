@@ -38,6 +38,7 @@ class MainMenu:
 
 
             self.fenetre.fill((0,0,50))   
-            self.fenetre.blit(self.textures["Coal1"] ,(0, 0))         
+            self.fenetre.blit(self.textures["Soil1.png"] ,(0, 0))    
+            self.fenetre.blit(self.textures["Gold1.png"] ,(0, 0))         
             pygame.display.flip()
             self.clock.tick(60)
