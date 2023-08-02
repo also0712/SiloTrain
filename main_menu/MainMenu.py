@@ -8,18 +8,28 @@ import copy
 
 class MainMenu:
  
-    def __init__(self,fenetre) :
+    def __init__(self,fenetre,clock) :
+        self.clock = clock
         self.fenetre = fenetre
+
         pygame.display.set_caption('SiloTrains - Menu')
-        self.running=True;
+        self.running=True
+        self.pressed_keys = {}
+
 
     def main_loop(self):
         while self.running:
             for event in pygame.event.get():
                 if event.type == QUIT:
                     return "QUIT"
+                elif event.type == pygame.KEYDOWN:
+                    print(event.key)
+                    self.pressed_keys[event.key] = True #ajoute au dictionnaire si n'existe pas
+                elif event.type == pygame.KEYUP:
+                    self.pressed_keys[event.key] = False 
 
-            self.fenetre.fill((0,0,50))
-            
+
+
+            self.fenetre.fill((0,0,50))            
             pygame.display.flip()
             self.clock.tick(60)
