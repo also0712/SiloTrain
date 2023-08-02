@@ -9,7 +9,6 @@ from main_menu.MainMenu import *
 
 #================initialisation pygame
 pygame.init()
-
 clock = pygame.time.Clock()
 
 #================initialisation fenetre
@@ -17,15 +16,25 @@ largeur_fenetre = 1280
 hauteur_fenetre = 720
 fenetre = pygame.display.set_mode((largeur_fenetre, hauteur_fenetre))
 
+
+#===============chargement des textures
 base_path = os.path.dirname(os.path.abspath(__file__))
-
-#===============chargement des textures grounds
-base_path_grounds = base_path + "\\assets\\grounds\\"
-liste_fichier = os.listdir(base_path_grounds)
-
 textures = {}
-for file in liste_fichier:
-    textures[file] = get_image(base_path_grounds + file ,112, 112)
+
+#GROUNDS
+base_path_grounds = base_path + "\\assets\\grounds\\"
+liste_grounds = os.listdir(base_path_grounds)
+for file in liste_grounds:
+    if os.path.isfile(base_path_grounds + file):
+        textures[file] = get_image(base_path_grounds + file ,112, 112,False)
+
+#OVER_GROUNDS
+base_path_over_grounds = base_path + "\\assets\\grounds\\OverGrounds\\"
+liste_over_grounds =  os.listdir(base_path_over_grounds)
+
+for file in liste_over_grounds:
+    if os.path.isfile(base_path_over_grounds + file):
+        textures[file] = get_image(base_path_over_grounds + file ,112, 112,True)
     
     
 #=============== gestion des game_mode
