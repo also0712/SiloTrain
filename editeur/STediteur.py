@@ -11,21 +11,19 @@ import copy
 
 
 class STediteur :
-    def __init__(self,fenetre,clock):
-        self.fenetre = fenetre
+    def __init__(self):
         pygame.display.set_caption('SiloTrains - Map Editor')
         self.running=True
-        self.clock = clock
         
 
         
-    def main_loop(self):
+    def main_loop(self,env):
         while self.running:
             for event in pygame.event.get():
                 if event.type == QUIT:
                     return "QUIT"
 
-            self.fenetre.fill((0,0,50))
+            env.fenetre.fill((0,0,50))
             
             pygame.display.flip()
-            self.clock.tick(60)
+            env.clock.tick(60)
