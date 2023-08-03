@@ -52,8 +52,6 @@ class MainMenu:
             num_col+=1
 
 
-
-
     def draw_soil(self,env):
         num_row =0
         while num_row < env.map_height_nbcell :
