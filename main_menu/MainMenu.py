@@ -39,7 +39,7 @@ class MainMenu:
 
     def draw_grid(self,env):
         num_row =0
-        line_color = (128, 128, 128)
+        line_color = (240, 240, 240)
         while num_row < env.map_height_nbcell :
             posY_pxl = num_row * env.cell_width_pxl
             pygame.draw.line(env.fenetre, line_color, (0, posY_pxl), (env.largeur_fenetre_pxl, posY_pxl))
@@ -56,7 +56,7 @@ class MainMenu:
         num_row =0
         while num_row < env.map_height_nbcell :
             self.draw_row_soil(env, num_row)
-            num_row+=4
+            num_row+=3
 
 
     def draw_row_soil(self,env,num_row):
@@ -65,8 +65,8 @@ class MainMenu:
         while num_cell_horizontal < env.map_width_nbcell :
             positionX_pxl = num_cell_horizontal * env.cell_width_pxl
             positionY_pxl = num_row * env.cell_width_pxl
-            env.fenetre.blit(env.textures["Soil1.png"] ,(positionX_pxl, positionY_pxl)) 
-            num_cell_horizontal +=4 
+            env.fenetre.blit(env.textures["Soil3.bmp"] ,(positionX_pxl, positionY_pxl)) 
+            num_cell_horizontal +=3 
 
         
 

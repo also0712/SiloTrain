@@ -39,8 +39,8 @@ class Environment:
                                                 has_alpha)
 
 enviro = Environment()
-enviro.load_textures("\\assets\\grounds\\" , False, 4,4)
-enviro.load_textures("\\assets\\grounds\\OverGrounds\\", True, 4,4)
+enviro.load_textures("\\assets\\grounds\\" , False,3,3)
+enviro.load_textures("\\assets\\grounds\\OverGrounds\\", True, 3,3)
 
 #=============== gestion des game_mode
 running =True
