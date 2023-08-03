@@ -8,10 +8,7 @@ import copy
 
 class MainMenu:
  
-    def __init__(self,fenetre,clock,textures) :
-        self.clock = clock
-        self.fenetre = fenetre
-        self.textures = textures
+    def __init__(self) :
         pygame.display.set_caption('SiloTrains - Menu')
         self.running=True
         self.pressed_keys = {
@@ -22,7 +19,7 @@ class MainMenu:
         }
 
 
-    def main_loop(self):
+    def main_loop(self,env):
         while self.running:
             for event in pygame.event.get():
                 if event.type == QUIT:
@@ -34,11 +31,47 @@ class MainMenu:
                     self.pressed_keys[event.key] = False 
 
 
-
-
-
-            self.fenetre.fill((0,0,50))   
-            self.fenetre.blit(self.textures["Soil1.png"] ,(0, 0))    
-            self.fenetre.blit(self.textures["Quartz1.png"] ,(0, 0))         
+            self.draw_soil(env)
+            self.draw_grid(env)
             pygame.display.flip()
-            self.clock.tick(60)
+            env.clock.tick(60)
+
+
+    def draw_grid(self,env):
+        num_row =0
+        line_color = (128, 128, 128)
+        while num_row < env.map_height_nbcell :
+            posY_pxl = num_row * env.cell_width_pxl
+            pygame.draw.line(env.fenetre, line_color, (0, posY_pxl), (env.largeur_fenetre_pxl, posY_pxl))
+            num_row+=1
+
+        num_col =0
+        while num_col < env.map_width_nbcell :
+            posX_pxl = num_col * env.cell_width_pxl
+            pygame.draw.line(env.fenetre, line_color, (posX_pxl,0), (posX_pxl,env.hauteur_fenetre_pxl))
+            num_col+=1
+
+
+
+
+    def draw_soil(self,env):
+        num_row =0
+        while num_row < env.map_height_nbcell :
+            self.draw_row_soil(env, num_row)
+            num_row+=4
+
+
+    def draw_row_soil(self,env,num_row):
+        num_cell_horizontal =0
+        
+        while num_cell_horizontal < env.map_width_nbcell :
+            positionX_pxl = num_cell_horizontal * env.cell_width_pxl
+            positionY_pxl = num_row * env.cell_width_pxl
+            env.fenetre.blit(env.textures["Soil1.png"] ,(positionX_pxl, positionY_pxl)) 
+            num_cell_horizontal +=4 
+
+        
+
+        
+
+

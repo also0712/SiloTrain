@@ -1,0 +1,9 @@
+{
+    "name": "Launch SiloTrains",
+    "type": "python",
+    "request": "launch",
+    "program": "${workspaceFolder}/SiloTrains.py",
+    "cwd": "${workspaceFolder}",
+    
+    "console": "integratedTerminal"
+}
