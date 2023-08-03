@@ -20,7 +20,7 @@ class Environment:
         self.max_zoom = 40
         self.min_zoom = 80
         self.largeur_fenetre_pxl = 1280
-        self.hauteur_fenetre_pxl = 360
+        self.hauteur_fenetre_pxl = 720
         self.fenetre = pygame.display.set_mode((self.largeur_fenetre_pxl, self.hauteur_fenetre_pxl))
 
         self.cell_width_pxl = self.largeur_fenetre_pxl // self.curent_zoom  #on fait une division entiere pour ne pas a voir de fractions de pixel a gerer

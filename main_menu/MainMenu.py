@@ -30,8 +30,8 @@ class MainMenu:
                 elif event.type == pygame.KEYUP:
                     self.pressed_keys[event.key] = False 
                 if event.type == MOUSEWHEEL:
-                    env.change_zoom(event.precise_y)
-                        
+                    env.change_zoom(-event.precise_y)
+
             self.draw_soil(env)
             self.draw_grid(env)
             pygame.display.flip()
@@ -66,7 +66,8 @@ class MainMenu:
         while num_cell_horizontal < env.map_width_nbcell :
             positionX_pxl = num_cell_horizontal * env.cell_width_pxl
             positionY_pxl = num_row * env.cell_width_pxl
-            env.fenetre.blit(env.textures["Soil3.bmp"] ,(positionX_pxl, positionY_pxl)) 
+            env.fenetre.blit(env.textures["Soil1.png"] ,(positionX_pxl, positionY_pxl)) 
+            env.fenetre.blit(env.textures["Coal1.png"] ,(positionX_pxl, positionY_pxl)) 
             num_cell_horizontal +=3 
 
         
