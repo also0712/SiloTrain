@@ -29,8 +29,9 @@ class MainMenu:
                     self.pressed_keys[event.key] = True #ajoute au dictionnaire si n'existe pas
                 elif event.type == pygame.KEYUP:
                     self.pressed_keys[event.key] = False 
-
-
+                if event.type == MOUSEWHEEL:
+                    env.change_zoom(event.precise_y)
+                        
             self.draw_soil(env)
             self.draw_grid(env)
             pygame.display.flip()
