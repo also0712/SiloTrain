@@ -32,6 +32,10 @@ class Environment:
         self.textures = {} #dictionnaire qui contiendra toutes les textures, la Key est le nom du fichier, et la key donne acces a une surface converted
     
     def change_zoom(self, zoom):
+        if  zoom>0 :
+            zoom = 1
+        elif  zoom<0 :
+            zoom = -1
         if self.curent_zoom + zoom < self.max_zoom:
             return
         if self.curent_zoom + zoom  > self.min_zoom:
