@@ -3,7 +3,8 @@ from pygame.locals import *
 import os
 import time
 import copy
-#import commons.GetImage
+from main_menu.MenuElement import *
+
 
 
 class MainMenu:
@@ -17,8 +18,32 @@ class MainMenu:
             1073741903 : False, #droite
             1073741904 : False  #gauche
         }
-
-
+            
+        self.menu_jouer = MenuElement()
+        self.menu_editeur = MenuElement()
+        self.menu_parametre = MenuElement()
+        self.menu_quit = MenuElement()
+        
+        self.menu_jouer.text = "Jouer"
+        self.menu_jouer.x_nbcell = 17
+        self.menu_jouer.y_nbcell = 8
+        self.menu_jouer.is_selected=True
+        
+        self.menu_editeur.text = "Editeur"
+        self.menu_editeur.x_nbcell = 21
+        self.menu_editeur.y_nbcell = 8
+        self.menu_editeur.is_selected=False
+        
+        self.menu_parametre.text = "Parametre"
+        self.menu_parametre.x_nbcell = 25
+        self.menu_parametre.y_nbcell = 8
+        self.menu_parametre.is_selected=False
+        
+        self.menu_quit.text = "Quitter"
+        self.menu_quit.x_nbcell = 29
+        self.menu_quit.y_nbcell = 8
+        self.menu_quit.is_selected=False
+        
     def main_loop(self,env):
         while self.running:
             for event in pygame.event.get():
@@ -34,6 +59,13 @@ class MainMenu:
 
             self.draw_soil(env)
             self.draw_grid(env)
+            
+            self.menu_jouer.draw(env)
+            self.menu_editeur.draw(env)
+            self.menu_parametre.draw(env)
+            self.menu_quit.draw(env)
+            
+            
             pygame.display.flip()
             env.clock.tick(60)
 
@@ -66,7 +98,7 @@ class MainMenu:
         while num_cell_horizontal < env.map_width_nbcell :
             positionX_pxl = num_cell_horizontal * env.cell_width_pxl
             positionY_pxl = num_row * env.cell_width_pxl
-            txt=env.get_texture("Soil3.bmp")
+            txt=env.get_texture("Soil2.bmp")
            
             env.fenetre.blit( txt,(positionX_pxl, positionY_pxl)) 
            # env.fenetre.blit(env.textures["Coal1.png"] ,(positionX_pxl, positionY_pxl)) 
