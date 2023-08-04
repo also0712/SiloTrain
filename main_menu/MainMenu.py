@@ -9,7 +9,7 @@ from main_menu.MenuElement import *
 
 class MainMenu:
     
-    def __init__(self) :
+    def __init__(self, env) :
         pygame.display.set_caption('SiloTrains - Menu')
         self.running=True
         self.pressed_keys = {
@@ -19,33 +19,29 @@ class MainMenu:
             1073741904 : False  #gauche
         }
             
-        self.menu_jouer = MenuElement()
-        self.menu_editeur = MenuElement()
-        self.menu_parametre = MenuElement()
-        self.menu_quit = MenuElement()
         
+        self.menu_jouer = MenuElement()
         self.menu_jouer.text = "Jouer"
-        self.menu_jouer.x_nbcell = 17
-        self.menu_jouer.y_nbcell = 3
         self.menu_jouer.is_selected=True
         
+        self.menu_editeur = MenuElement()
         self.menu_editeur.text = "Editeur"
-        self.menu_editeur.x_nbcell = 17
-        self.menu_editeur.y_nbcell = 6
         self.menu_editeur.is_selected=False
         
+        self.menu_parametre = MenuElement()
         self.menu_parametre.text = "Parametre"
-        self.menu_parametre.x_nbcell = 17
-        self.menu_parametre.y_nbcell = 9
         self.menu_parametre.is_selected=False
         
+        self.menu_quit = MenuElement()
         self.menu_quit.text = "Quitter"
-        self.menu_quit.x_nbcell = 17
-        self.menu_quit.y_nbcell = 12
         self.menu_quit.is_selected=False
         
         self.list_menu = [self.menu_jouer, self.menu_editeur ,self.menu_parametre ,self.menu_quit]
-        
+        compteur = 0
+        for menu in self.list_menu:
+            compteur += 1
+            espace = env.hauteur_fenetre_pxl // (len(self.list_menu) + 1)
+            menu.y_pix = espace * compteur
         self.quel_menu = 0
     
     def main_loop(self,env):
