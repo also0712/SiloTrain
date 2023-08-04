@@ -36,14 +36,14 @@ class Environment:
             zoom = 1
         elif  zoom<0 :
             zoom = -1
-        if self.curent_zoom + zoom < self.max_zoom:
+        if self.curent_zoom + zoom < self.max_zoom:# si on a atteind le zoom maximum donc au ne peut plus zoomer
             return
-        if self.curent_zoom + zoom  > self.min_zoom:
+        if self.curent_zoom + zoom  > self.min_zoom: #si on a atteind le zoom minimum donc on ne peu plus dezoomer
             return
         else:
             self.curent_zoom += zoom * 5
             print(self.curent_zoom)
-            self.cell_width_pxl = self.largeur_fenetre_pxl // self.curent_zoom
+            self.cell_width_pxl = self.largeur_fenetre_pxl // self.curent_zoom #le zoom a changé on recalcule la taille d'une cellule de base (dont depent tous les autres graphisme)
             
                 
     def load_textures(self, relative_folder, has_alpha ):
