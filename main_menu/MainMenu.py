@@ -66,8 +66,10 @@ class MainMenu:
         while num_cell_horizontal < env.map_width_nbcell :
             positionX_pxl = num_cell_horizontal * env.cell_width_pxl
             positionY_pxl = num_row * env.cell_width_pxl
-            env.fenetre.blit(env.textures["Soil1.png"] ,(positionX_pxl, positionY_pxl)) 
-            env.fenetre.blit(env.textures["Coal1.png"] ,(positionX_pxl, positionY_pxl)) 
+            txt=env.get_texture("Soil3.bmp")
+           
+            env.fenetre.blit( txt,(positionX_pxl, positionY_pxl)) 
+           # env.fenetre.blit(env.textures["Coal1.png"] ,(positionX_pxl, positionY_pxl)) 
             num_cell_horizontal +=3 
 
         

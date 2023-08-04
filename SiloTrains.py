@@ -20,7 +20,7 @@ class Environment:
         self.max_zoom = 40
         self.min_zoom = 80
         self.largeur_fenetre_pxl = 1280
-        self.hauteur_fenetre_pxl = 720
+        self.hauteur_fenetre_pxl = 360
         self.fenetre = pygame.display.set_mode((self.largeur_fenetre_pxl, self.hauteur_fenetre_pxl))
 
         self.cell_width_pxl = self.largeur_fenetre_pxl // self.curent_zoom  #on fait une division entiere pour ne pas a voir de fractions de pixel a gerer
@@ -46,19 +46,41 @@ class Environment:
             self.cell_width_pxl = self.largeur_fenetre_pxl // self.curent_zoom
             
                 
-    def load_textures(self, relative_folder, has_alpha,width_nbcel, height_nbcel ):
+    def load_textures(self, relative_folder, has_alpha ):
         full_dir = self.base_path + relative_folder
         lst_textures = os.listdir(full_dir)
         for file in lst_textures:
             if os.path.isfile(full_dir + file):
-                self.textures[file] = get_image(full_dir + file ,
-                                                width_nbcel  * self.cell_width_pxl, 
-                                                height_nbcel * self.cell_width_pxl, 
-                                                has_alpha)
-
+                self.textures[file] = get_image(full_dir + file , has_alpha)
+    
+    def get_texture(self, key):
+        key_zoom = str(self.curent_zoom) + key
+        if key_zoom in self.textures:
+            return self.textures[key_zoom]
+        else:
+            txt = self.textures[key]
+            print(txt.get_rect())
+            width_pxl = txt.get_rect()[2]
+            height_pxl = txt.get_rect()[3]
+            height_nbcell = height_pxl // (self.largeur_fenetre_pxl // self.min_zoom) #nb cell pour le zoom de base
+            width_nbcell = width_pxl // (self.largeur_fenetre_pxl // self.min_zoom)
+            cell_dimension_pxl = self.largeur_fenetre_pxl // self.curent_zoom
+            txt_scaled = pygame.transform.scale(txt, (cell_dimension_pxl * width_nbcell, cell_dimension_pxl * height_nbcell))
+            print(txt_scaled.get_rect())
+            if key.endswith('bmp'):
+                self.textures[key_zoom]=txt_scaled.convert()
+            elif key.endswith('png'):
+                self.textures[key_zoom]=txt_scaled.convert_alpha()
+            else:
+                raise Exception("ERROR: le format d'image de " + key + " doit etre bmp ou png")
+            
+            return self.textures[key_zoom]
+                
+                
+            
 enviro = Environment()
-enviro.load_textures("\\assets\\grounds\\" , False,3,3)
-enviro.load_textures("\\assets\\grounds\\OverGrounds\\", True, 3,3)
+enviro.load_textures("\\assets\\grounds\\" , False)
+enviro.load_textures("\\assets\\grounds\\OverGrounds\\", True)
 
 #=============== gestion des game_mode
 running =True
