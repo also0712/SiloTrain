@@ -26,78 +26,57 @@ class MainMenu:
         
         self.menu_jouer.text = "Jouer"
         self.menu_jouer.x_nbcell = 17
-        self.menu_jouer.y_nbcell = 8
+        self.menu_jouer.y_nbcell = 3
         self.menu_jouer.is_selected=True
         
         self.menu_editeur.text = "Editeur"
-        self.menu_editeur.x_nbcell = 21
-        self.menu_editeur.y_nbcell = 8
+        self.menu_editeur.x_nbcell = 17
+        self.menu_editeur.y_nbcell = 6
         self.menu_editeur.is_selected=False
         
         self.menu_parametre.text = "Parametre"
-        self.menu_parametre.x_nbcell = 25
-        self.menu_parametre.y_nbcell = 8
+        self.menu_parametre.x_nbcell = 17
+        self.menu_parametre.y_nbcell = 9
         self.menu_parametre.is_selected=False
         
         self.menu_quit.text = "Quitter"
-        self.menu_quit.x_nbcell = 29
-        self.menu_quit.y_nbcell = 8
+        self.menu_quit.x_nbcell = 17
+        self.menu_quit.y_nbcell = 12
         self.menu_quit.is_selected=False
         
+        self.list_menu = [self.menu_jouer, self.menu_editeur ,self.menu_parametre ,self.menu_quit]
         
-        
-        
-        self.quel_menu = 1
+        self.quel_menu = 0
+    
     def main_loop(self,env):
         while self.running:
             for event in pygame.event.get():
                 if event.type == QUIT:
                     return "QUIT"
                 elif event.type == pygame.KEYDOWN:
-                    print(event.key)
                     self.pressed_keys[event.key] = True #ajoute au dictionnaire si n'existe pas
                 elif event.type == pygame.KEYUP:
                     self.pressed_keys[event.key] = False 
+                    
                 if event.type == MOUSEWHEEL:
                     env.change_zoom(-event.precise_y)
-                    
-                if event.type == K_DOWN:
-                    self.quel_menu += 1
-                elif event.type == K_UP:
-                    self.quel_menu -= 1
-                                  
-                if self.quel_menu == 1:
-                    self.menu_jouer.is_selected = True
-                elif self.quel_menu == 2:
-                    self.menu_editeur.is_selected = True
-                elif self.quel_menu == 3:
-                    self.menu_parametre.is_selected = True
-                elif self.quel_menu == 4:
-                    self.menu_editeur.is_selected = True
-                    
-                if self.quel_menu != 1:
-                    self.menu_jouer.is_selected = False
-                    
-                if self.quel_menu != 2:
-                    self.menu_editeur.is_selected = False
-                    
-                if self.quel_menu != 3:
-                    self.menu_parametre.is_selected = False
-                    
-                if self.quel_menu != 4:
-                    self.menu_quit.is_selected = False
-                print(self.quel_menu)
-                    
-                    
+                if event.type == pygame.KEYDOWN:
+                    if event.key == K_DOWN:
+                        if self.quel_menu + 1 < len(self.list_menu):
+                            self.quel_menu += 1
+                    elif event.key == K_UP:
+                        if self.quel_menu > 0:
+                            self.quel_menu -= 1
+                for mnu in self.list_menu:
+                    mnu.is_selected = False
+                self.list_menu[self.quel_menu].is_selected = True
+             
             self.draw_soil(env)
-            self.draw_grid(env)
-            
-            self.menu_jouer.draw(env)
-            self.menu_editeur.draw(env)
-            self.menu_parametre.draw(env)
-            self.menu_quit.draw(env)
-            
-            
+            self.draw_grid(env) 
+          
+            for mnu in self.list_menu:
+                mnu.draw(env)
+                
             pygame.display.flip()
             env.clock.tick(60)
 

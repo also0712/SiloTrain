@@ -26,8 +26,8 @@ class MenuElement:
         surf_elt = self.font.render(self.text, True, color)
         rect_element = surf_elt.get_rect()
         rect_element[0] = self.x_nbcell * env.cell_width_pxl
-        rect_element[2] += self.x_nbcell * env.cell_width_pxl
         rect_element[1] = self.y_nbcell * env.cell_width_pxl
+        rect_element[2] += self.x_nbcell * env.cell_width_pxl
         rect_element[3] += self.y_nbcell * env.cell_width_pxl
         env.fenetre.blit(surf_elt, rect_element)
  
