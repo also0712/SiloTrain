@@ -8,7 +8,7 @@ from main_menu.MenuElement import *
 
 
 class MainMenu:
- 
+    
     def __init__(self) :
         pygame.display.set_caption('SiloTrains - Menu')
         self.running=True
@@ -44,6 +44,10 @@ class MainMenu:
         self.menu_quit.y_nbcell = 8
         self.menu_quit.is_selected=False
         
+        
+        
+        
+        self.quel_menu = 1
     def main_loop(self,env):
         while self.running:
             for event in pygame.event.get():
@@ -56,7 +60,35 @@ class MainMenu:
                     self.pressed_keys[event.key] = False 
                 if event.type == MOUSEWHEEL:
                     env.change_zoom(-event.precise_y)
-
+                    
+                if event.type == K_DOWN:
+                    self.quel_menu += 1
+                elif event.type == K_UP:
+                    self.quel_menu -= 1
+                                  
+                if self.quel_menu == 1:
+                    self.menu_jouer.is_selected = True
+                elif self.quel_menu == 2:
+                    self.menu_editeur.is_selected = True
+                elif self.quel_menu == 3:
+                    self.menu_parametre.is_selected = True
+                elif self.quel_menu == 4:
+                    self.menu_editeur.is_selected = True
+                    
+                if self.quel_menu != 1:
+                    self.menu_jouer.is_selected = False
+                    
+                if self.quel_menu != 2:
+                    self.menu_editeur.is_selected = False
+                    
+                if self.quel_menu != 3:
+                    self.menu_parametre.is_selected = False
+                    
+                if self.quel_menu != 4:
+                    self.menu_quit.is_selected = False
+                print(self.quel_menu)
+                    
+                    
             self.draw_soil(env)
             self.draw_grid(env)
             
