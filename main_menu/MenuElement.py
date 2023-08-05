@@ -16,25 +16,26 @@ class MenuElement:
         self.color = (150,150,150) #gris
         self.color_selected = (200,200,200) #gris clair
         self.font = pygame.font.SysFont('Comic Sans MS', 50)
-
-        self.surf_elt = self.font.render(self.text, True, self.color)
-        
-
-
-    def draw(self, env):
+        self.rect_element = None
+        self.surf_elt = None
+    def preparation(self, env):
         
         color = self.color
         if self.is_selected:
             color = self.color_selected
-        surf_elt = self.font.render(self.text, True, color)
-        rect_element = surf_elt.get_rect()
-        self.x_pix = env.largeur_fenetre_pxl // 2 - rect_element[2] // 2
+        self.surf_elt = self.font.render(self.text, True, color)
+        self.rect_element = self.surf_elt.get_rect()
+        self.x_pix = env.largeur_fenetre_pxl // 2 - self.rect_element[2] // 2
         
-        rect_element[0] = self.x_pix
-        rect_element[1] = self.y_pix - rect_element[3]//2
-        rect_element[2] += self.x_pix
-        rect_element[3] += self.y_pix - rect_element[3] //2
-        env.fenetre.blit(surf_elt, rect_element)
+        self.rect_element[0] = self.x_pix
+        self.rect_element[1] = self.y_pix - self.rect_element[3]//2
+        self.rect_element[2] += self.x_pix
+        self.rect_element[3] += self.y_pix - self.rect_element[3] //2
+
+    def draw(self, env):
+        
+
+        env.fenetre.blit(self.surf_elt, self.rect_element)
  
 
       

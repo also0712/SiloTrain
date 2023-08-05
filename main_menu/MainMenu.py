@@ -4,6 +4,7 @@ import os
 import time
 import copy
 from main_menu.MenuElement import *
+from commons.Tools import *
 
 
 
@@ -46,6 +47,9 @@ class MainMenu:
     
     def main_loop(self,env):
         while self.running:
+            return_key_pressed = False
+            keyboard_changed = False
+            
             for event in pygame.event.get():
                 if event.type == QUIT:
                     return "QUIT"
@@ -60,13 +64,47 @@ class MainMenu:
                     if event.key == K_DOWN:
                         if self.quel_menu + 1 < len(self.list_menu):
                             self.quel_menu += 1
+                            keyboard_changed = True
                     elif event.key == K_UP:
                         if self.quel_menu > 0:
                             self.quel_menu -= 1
+                            keyboard_changed = True
+                    elif event.key == K_RETURN :
+                        return_key_pressed=True
+                if(event.type == pygame.MOUSEBUTTONDOWN and event.button == 1):
+                    return_key_pressed=True
+                mouse_x_px, mouse_y_px = pygame.mouse.get_pos()
+                
+
+                #======================calculs
+                
+               
+                if return_key_pressed :
+                    for mnu in self.list_menu: #detection si les felche nous envoie sur un menu
+                        if mnu.is_selected :
+                            return mnu.text
+
+                
+                
                 for mnu in self.list_menu:
-                    mnu.is_selected = False
-                self.list_menu[self.quel_menu].is_selected = True
-             
+                    mnu.preparation(env)
+                
+                if keyboard_changed :
+                    for mnu in self.list_menu: #detection si les felche nous envoie sur un menu
+                        mnu.is_selected = False
+                    self.list_menu[self.quel_menu].is_selected = True
+                  
+                else:
+                    for mnu in self.list_menu: #detection si la souris est sur un menu
+                        mouse_in_rect = is_in_rect(mouse_x_px, mouse_y_px , mnu.rect_element)
+                        if mouse_in_rect == True:
+                            for mnu2 in self.list_menu: 
+                                mnu2.is_selected = False
+                            mnu.is_selected = True
+                            break
+                
+            #=========================affichage
+            
             self.draw_soil(env)
             self.draw_grid(env) 
           
@@ -75,7 +113,9 @@ class MainMenu:
                 
             pygame.display.flip()
             env.clock.tick(60)
-
+            
+            
+            
 
     def draw_grid(self,env):
         num_row =0

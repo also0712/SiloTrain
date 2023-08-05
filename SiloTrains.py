@@ -20,7 +20,7 @@ class Environment:
         self.max_zoom = 40
         self.min_zoom = 80
         self.largeur_fenetre_pxl = 1280
-        self.hauteur_fenetre_pxl = 720
+        self.hauteur_fenetre_pxl = 360
         self.fenetre = pygame.display.set_mode((self.largeur_fenetre_pxl, self.hauteur_fenetre_pxl))
 
         self.cell_width_pxl = self.largeur_fenetre_pxl // self.curent_zoom  #on fait une division entiere pour ne pas a voir de fractions de pixel a gerer
@@ -89,14 +89,14 @@ main_menu = MainMenu(enviro)
 while running : 
     game_mode = main_menu.main_loop(enviro) #la main loop du menu retour le mode de jeu
 
-    if game_mode == "QUIT":
+    if game_mode == "Quitter":
         pygame.quit
         running = False
 
-    if game_mode == "EDITOR":
+    if game_mode == "Editeur":
         ed = STediteur()
         ed.main_loop(enviro)
 
-    if game_mode == "GAME":
+    if game_mode == "Jouer":
         pass
  
