@@ -44,6 +44,10 @@ class MainMenu:
             espace = env.hauteur_fenetre_pxl // (len(self.list_menu) + 1)
             menu.y_pix = espace * compteur
         self.quel_menu = 0
+
+
+        self.map = Map(env)
+        self.map.auto_generate_map(env)
     
     def main_loop(self,env):
         while self.running:
@@ -105,7 +109,7 @@ class MainMenu:
                 
             #=========================affichage
             
-            self.draw_soil(env)
+            self.map.draw(env)
             self.draw_grid(env) 
           
             for mnu in self.list_menu:
@@ -120,28 +124,24 @@ class MainMenu:
     def draw_grid(self,env):
         num_row =0
         line_color = (240, 240, 240)
-        while num_row < env.map_height_nbcell :
+        while num_row < env.map_height_cel :
             posY_pxl = num_row * env.cell_width_pxl
             pygame.draw.line(env.fenetre, line_color, (0, posY_pxl), (env.largeur_fenetre_pxl, posY_pxl))
             num_row+=1
 
         num_col =0
-        while num_col < env.map_width_nbcell :
+        while num_col < env.map_width_cel :
             posX_pxl = num_col * env.cell_width_pxl
             pygame.draw.line(env.fenetre, line_color, (posX_pxl,0), (posX_pxl,env.hauteur_fenetre_pxl))
             num_col+=1
 
 
-    def draw_soil(self,env):
-        num_row =0
-        while num_row < env.map_height_nbcell :
-            self.draw_row_soil(env, num_row)
-            num_row+=3
+   
+       
 
 
-    def draw_row_soil(self,env,num_row):
-        map = Map(env)
-        map.draw()
+   
+        
        
         
 

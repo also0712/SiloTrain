@@ -16,19 +16,19 @@ class Map:
         self.over_grounds = []
         self.env = env
         
-    def auto_generate_map(self):
-        ground_texture_names = get_folder_files(self.env, "\\assets\\textures\\Grounds")
-        cpt_cl = 0
-        while cpt_cl < self.map_width_nbcell:
+    def auto_generate_map(self,env):
+        ground_texture_names = env.get_folder_files("\\assets\\textures\\Grounds\\")
+        cpt_cel = 0
+        while cpt_cel < env.map_width_cel:
             alea = random.randint(0,len(ground_texture_names)-1)
             name = ground_texture_names[alea]
-            map_sprite = MapSprite(name, cpt_cl*3)
-            self.grounds.append(MapSprite)
-            cpt_cl += 3
+            map_sprite = MapSprite(name, cpt_cel )
+            self.grounds.append(map_sprite)
+            cpt_cel += 3
     
-    def draw(self):
+    def draw(self,env):
         for sprite in self.grounds:
-            sprite.draw()
+            sprite.draw(env)
         
         
         

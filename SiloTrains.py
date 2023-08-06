@@ -7,10 +7,8 @@ from commons.Tools import *
 from editeur.STediteur import *
 from main_menu.MainMenu import *
 
-base_path = os.path.dirname(os.path.abspath(__file__))
-def get_folder_files(env,relative_folder ):
-    full_dir = base_path + relative_folder
-    return os.listdir(full_dir)
+
+
 #================initialisation pygame
 pygame.init()
 
@@ -21,6 +19,8 @@ class Environment:
     def __init__(self) :
         self.clock = pygame.time.Clock()
 
+        self.base_path = os.path.dirname(os.path.abspath(__file__))
+
         #================initialisation fenetre
         self.curent_zoom = 40
         self.max_zoom = 40
@@ -30,13 +30,17 @@ class Environment:
         self.fenetre = pygame.display.set_mode((self.largeur_fenetre_pxl, self.hauteur_fenetre_pxl))
 
         self.cell_width_pxl = self.largeur_fenetre_pxl // self.curent_zoom  #on fait une division entiere pour ne pas a voir de fractions de pixel a gerer
-        self.map_width_nbcell = 128
-        self.map_height_nbcell = 64
+        self.map_width_cel = 128
+        self.map_height_cel = 64
 
         #===============chargement des textures
         self.base_path = os.path.dirname(os.path.abspath(__file__))
         self.textures = {} #dictionnaire qui contiendra toutes les textures, la Key est le nom du fichier, et la key donne acces a une surface converted
     
+    def get_folder_files(self,relative_folder ):
+        full_dir = self.base_path + relative_folder
+        return os.listdir(full_dir)
+
     def change_zoom(self, zoom):
         if  zoom>0 :
             zoom = 1
@@ -55,7 +59,7 @@ class Environment:
         
     def load_textures(self, relative_folder, has_alpha ):
         full_dir = self.base_path + relative_folder
-        lst_textures = get_folder_files(self, relative_folder)
+        lst_textures = self.get_folder_files(relative_folder)
         for file in lst_textures:
             if os.path.isfile(full_dir + file):
                 self.textures[file] = get_image(full_dir + file , has_alpha)
@@ -69,10 +73,10 @@ class Environment:
             print(txt.get_rect())
             width_pxl = txt.get_rect()[2]
             height_pxl = txt.get_rect()[3]
-            height_nbcell = height_pxl // (self.largeur_fenetre_pxl // self.min_zoom) #nb cell pour le zoom de base
-            width_nbcell = width_pxl // (self.largeur_fenetre_pxl // self.min_zoom)
+            height_cel = height_pxl // (self.largeur_fenetre_pxl // self.min_zoom) #nb cell pour le zoom de base
+            width_cel = width_pxl // (self.largeur_fenetre_pxl // self.min_zoom)
             cell_dimension_pxl = self.largeur_fenetre_pxl // self.curent_zoom
-            txt_scaled = pygame.transform.scale(txt, (cell_dimension_pxl * width_nbcell, cell_dimension_pxl * height_nbcell))
+            txt_scaled = pygame.transform.scale(txt, (cell_dimension_pxl * width_cel, cell_dimension_pxl * height_cel))
             print(txt_scaled.get_rect())
             if key.endswith('bmp'):
                 self.textures[key_zoom]=txt_scaled.convert()
@@ -86,7 +90,7 @@ class Environment:
                 
             
 enviro = Environment()
-enviro.load_textures("\\assets\\textures\\Grounds" , False)
+enviro.load_textures("\\assets\\textures\\Grounds\\" , False)
 enviro.load_textures("\\assets\\textures\\OverGrounds\\", True)
 
 #=============== gestion des game_mode
