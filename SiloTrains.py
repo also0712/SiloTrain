@@ -7,8 +7,14 @@ from commons.Tools import *
 from editeur.STediteur import *
 from main_menu.MainMenu import *
 
+base_path = os.path.dirname(os.path.abspath(__file__))
+def get_folder_files(env,relative_folder ):
+    full_dir = base_path + relative_folder
+    return os.listdir(full_dir)
 #================initialisation pygame
 pygame.init()
+
+
 
 
 class Environment:
@@ -45,10 +51,11 @@ class Environment:
             print(self.curent_zoom)
             self.cell_width_pxl = self.largeur_fenetre_pxl // self.curent_zoom #le zoom a changé on recalcule la taille d'une cellule de base (dont depent tous les autres graphisme)
             
-                
+   
+        
     def load_textures(self, relative_folder, has_alpha ):
         full_dir = self.base_path + relative_folder
-        lst_textures = os.listdir(full_dir)
+        lst_textures = get_folder_files(self, relative_folder)
         for file in lst_textures:
             if os.path.isfile(full_dir + file):
                 self.textures[file] = get_image(full_dir + file , has_alpha)
@@ -79,8 +86,8 @@ class Environment:
                 
             
 enviro = Environment()
-enviro.load_textures("\\assets\\grounds\\" , False)
-enviro.load_textures("\\assets\\grounds\\OverGrounds\\", True)
+enviro.load_textures("\\assets\\textures\\Grounds" , False)
+enviro.load_textures("\\assets\\textures\\OverGrounds\\", True)
 
 #=============== gestion des game_mode
 running =True

@@ -5,7 +5,7 @@ import time
 import copy
 from main_menu.MenuElement import *
 from commons.Tools import *
-
+from commons.map.Map import *
 
 
 class MainMenu:
@@ -140,17 +140,9 @@ class MainMenu:
 
 
     def draw_row_soil(self,env,num_row):
-        num_cell_horizontal =0
-        
-        while num_cell_horizontal < env.map_width_nbcell :
-            positionX_pxl = num_cell_horizontal * env.cell_width_pxl
-            positionY_pxl = num_row * env.cell_width_pxl
-            txt=env.get_texture("Soil2.bmp")
-           
-            env.fenetre.blit( txt,(positionX_pxl, positionY_pxl)) 
-           # env.fenetre.blit(env.textures["Coal1.png"] ,(positionX_pxl, positionY_pxl)) 
-            num_cell_horizontal +=3 
-
+        map = Map(env)
+        map.draw()
+       
         
 
         
