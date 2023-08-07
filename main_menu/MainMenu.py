@@ -1,11 +1,9 @@
 import pygame
 from pygame.locals import *
-import os
-import time
-import copy
+from commons.map.Map import *
 from main_menu.MenuElement import *
 from commons.Tools import *
-from commons.map.Map import *
+
 
 
 class MainMenu:
@@ -47,7 +45,7 @@ class MainMenu:
 
 
         self.map = Map(env)
-        self.map.auto_generate_map(env)
+        self.map.auto_generate_map()
     
     def main_loop(self,env):
         while self.running:
@@ -109,7 +107,7 @@ class MainMenu:
                 
             #=========================affichage
             
-            self.map.draw(env)
+            self.map.draw()
             self.draw_grid(env) 
           
             for mnu in self.list_menu:

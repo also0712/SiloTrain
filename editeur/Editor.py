@@ -10,7 +10,7 @@ import copy
 
 
 
-class STediteur :
+class Editor :
     def __init__(self):
         pygame.display.set_caption('SiloTrains - Map Editor')
         self.running=True

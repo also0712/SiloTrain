@@ -8,10 +8,10 @@ from main_menu.MenuElement import *
 from commons.Tools import *
 
 class MapSprite:
-    def __init__(self, name, num_col_cl):
+    def __init__(self, name, num_row_cl, num_col_cl):
         self.sprite_name = name
         self.num_col_cl = num_col_cl
-        self.num_row_cl = 0
+        self.num_row_cl = num_row_cl
 
 
     def draw(self, env):
