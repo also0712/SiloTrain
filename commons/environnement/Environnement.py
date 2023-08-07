@@ -6,11 +6,12 @@ import copy
 from commons.Tools import *
 
 
+env=None
+
 class Environment:
-    def __init__(self) :
+    def __init__(self,base_path) :
         self.clock = pygame.time.Clock()
 
-        self.base_path = os.path.dirname(os.path.abspath(__file__))
 
         #================initialisation fenetre
         self.curent_zoom = 40
@@ -25,7 +26,7 @@ class Environment:
         self.map_height_cel = 64
 
         #===============chargement des textures
-        self.base_path = os.path.dirname(os.path.abspath(__file__))
+        self.base_path = base_path 
         self.textures = {} #dictionnaire qui contiendra toutes les textures, la Key est le nom du fichier, et la key donne acces a une surface converted
 
         self.load_textures("\\assets\\textures\\Grounds\\" , False)
@@ -80,3 +81,4 @@ class Environment:
                 raise Exception("ERROR: le format d'image de " + key + " doit etre bmp ou png")
             
             return self.textures[key_zoom]
+        

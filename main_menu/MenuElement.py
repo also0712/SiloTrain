@@ -1,9 +1,6 @@
 import pygame
 from pygame.locals import *
-import os
-import time
-import copy
-#import commons.GetImage
+import commons.environnement.Environnement as Env
 
 
 class MenuElement:
@@ -18,24 +15,21 @@ class MenuElement:
         self.font = pygame.font.SysFont('Comic Sans MS', 50)
         self.rect_element = None
         self.surf_elt = None
-    def preparation(self, env):
-        
+    def preparation(self):
         color = self.color
         if self.is_selected:
             color = self.color_selected
         self.surf_elt = self.font.render(self.text, True, color)
         self.rect_element = self.surf_elt.get_rect()
-        self.x_pix = env.largeur_fenetre_pxl // 2 - self.rect_element[2] // 2
+        self.x_pix = Env.env.largeur_fenetre_pxl // 2 - self.rect_element[2] // 2
         
         self.rect_element[0] = self.x_pix
         self.rect_element[1] = self.y_pix - self.rect_element[3]//2
         self.rect_element[2] += self.x_pix
         self.rect_element[3] += self.y_pix - self.rect_element[3] //2
 
-    def draw(self, env):
-        
-
-        env.fenetre.blit(self.surf_elt, self.rect_element)
+    def draw(self):
+        Env.env.fenetre.blit(self.surf_elt, self.rect_element)
  
 
       

@@ -1,14 +1,16 @@
 import pygame
+import commons.environnement.Environnement as Env
+
 from pygame.locals import *
 from commons.map.Map import *
 from main_menu.MenuElement import *
 from commons.Tools import *
 
 
-
 class MainMenu:
     
-    def __init__(self, env) :
+    def __init__(self) :
+        
         pygame.display.set_caption('SiloTrains - Menu')
         self.running=True
         self.pressed_keys = {
@@ -39,15 +41,16 @@ class MainMenu:
         compteur = 0
         for menu in self.list_menu:
             compteur += 1
-            espace = env.hauteur_fenetre_pxl // (len(self.list_menu) + 1)
+            espace = Env.env.hauteur_fenetre_pxl // (len(self.list_menu) + 1)
             menu.y_pix = espace * compteur
         self.quel_menu = 0
 
 
-        self.map = Map(env)
+        self.map = Map()
         self.map.auto_generate_map()
     
-    def main_loop(self,env):
+    def main_loop(self):
+        global _env
         while self.running:
             return_key_pressed = False
             keyboard_changed = False
@@ -61,7 +64,7 @@ class MainMenu:
                     self.pressed_keys[event.key] = False 
                     
                 if event.type == MOUSEWHEEL:
-                    env.change_zoom(-event.precise_y)
+                    Env.env.change_zoom(-event.precise_y)
                 if event.type == pygame.KEYDOWN:
                     if event.key == K_DOWN:
                         if self.quel_menu + 1 < len(self.list_menu):
@@ -89,7 +92,7 @@ class MainMenu:
                 
                 
                 for mnu in self.list_menu:
-                    mnu.preparation(env)
+                    mnu.preparation()
                 
                 if keyboard_changed :
                     for mnu in self.list_menu: #detection si les felche nous envoie sur un menu
@@ -108,29 +111,30 @@ class MainMenu:
             #=========================affichage
             
             self.map.draw()
-            self.draw_grid(env) 
+            self.draw_grid() 
           
             for mnu in self.list_menu:
-                mnu.draw(env)
+                mnu.draw()
                 
             pygame.display.flip()
-            env.clock.tick(60)
+            Env.env.clock.tick(60)
             
             
             
 
-    def draw_grid(self,env):
+    def draw_grid(self):
+        global _env
         num_row =0
         line_color = (240, 240, 240)
-        while num_row < env.map_height_cel :
-            posY_pxl = num_row * env.cell_width_pxl
-            pygame.draw.line(env.fenetre, line_color, (0, posY_pxl), (env.largeur_fenetre_pxl, posY_pxl))
+        while num_row < Env.env.map_height_cel :
+            posY_pxl = num_row * Env.env.cell_width_pxl
+            pygame.draw.line(Env.env.fenetre, line_color, (0, posY_pxl), (Env.env.largeur_fenetre_pxl, posY_pxl))
             num_row+=1
 
         num_col =0
-        while num_col < env.map_width_cel :
-            posX_pxl = num_col * env.cell_width_pxl
-            pygame.draw.line(env.fenetre, line_color, (posX_pxl,0), (posX_pxl,env.hauteur_fenetre_pxl))
+        while num_col < Env.env.map_width_cel :
+            posX_pxl = num_col * Env.env.cell_width_pxl
+            pygame.draw.line(Env.env.fenetre, line_color, (posX_pxl,0), (posX_pxl,Env.env.hauteur_fenetre_pxl))
             num_col+=1
 
 

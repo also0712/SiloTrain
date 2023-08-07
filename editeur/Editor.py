@@ -3,10 +3,7 @@ from pygame.locals import *
 import os
 import time
 import copy
-#import commons.GetImage
-
-
-
+import commons.environnement.Environnement as Env
 
 
 
@@ -17,13 +14,13 @@ class Editor :
         
 
         
-    def main_loop(self,env):
+    def main_loop(self):
         while self.running:
             for event in pygame.event.get():
                 if event.type == QUIT:
                     return "QUIT"
 
-            env.fenetre.fill((0,0,50))
+            Env.fenetre.fill((0,0,50))
             
             pygame.display.flip()
-            env.clock.tick(60)
+            Env.env.clock.tick(60)
