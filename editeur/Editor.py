@@ -20,7 +20,7 @@ class Editor :
                 if event.type == QUIT:
                     return "QUIT"
 
-            Env.fenetre.fill((0,0,50))
+            Env.env.fenetre.fill((0,0,50))
             
             pygame.display.flip()
             Env.env.clock.tick(60)

@@ -48,7 +48,6 @@ class Environment:
             return
         else:
             self.curent_zoom += zoom * 5
-            print(self.curent_zoom)
             self.cell_width_pxl = self.largeur_fenetre_pxl // self.curent_zoom #le zoom a changé on recalcule la taille d'une cellule de base (dont depent tous les autres graphisme)
    
         
@@ -65,14 +64,12 @@ class Environment:
             return self.textures[key_zoom]
         else:
             txt = self.textures[key]
-            print(txt.get_rect())
             width_pxl = txt.get_rect()[2]
             height_pxl = txt.get_rect()[3]
             height_cel = height_pxl // (self.largeur_fenetre_pxl // self.min_zoom) #nb cell pour le zoom de base
             width_cel = width_pxl // (self.largeur_fenetre_pxl // self.min_zoom)
             cell_dimension_pxl = self.largeur_fenetre_pxl // self.curent_zoom
             txt_scaled = pygame.transform.scale(txt, (cell_dimension_pxl * width_cel, cell_dimension_pxl * height_cel))
-            print(txt_scaled.get_rect())
             if key.endswith('bmp'):
                 self.textures[key_zoom]=txt_scaled.convert()
             elif key.endswith('png'):
