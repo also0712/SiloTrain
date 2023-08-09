@@ -18,7 +18,7 @@ class Editor :
         while self.running:
             for event in pygame.event.get():
                 if event.type == QUIT:
-                    return "QUIT"
+                    return "Quitter"
 
             Env.env.fenetre.fill((0,0,50))
             

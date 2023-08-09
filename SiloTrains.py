@@ -21,14 +21,14 @@ main_menu = MainMenu()
 while running : 
     game_mode = main_menu.main_loop() #la main loop du menu retour le mode de jeu
 
-    if game_mode == "Quitter":
-        pygame.quit
-        running = False
-
+    
     if game_mode == "Editeur":
         ed = Editor()
-        ed.main_loop()
+        game_mode = ed.main_loop()
 
     if game_mode == "Jouer":
         pass
  
+    if game_mode == "Quitter":
+        pygame.quit
+        running = False
