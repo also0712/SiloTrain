@@ -6,16 +6,12 @@ from main_menu.MenuElement import *
 from commons.Tools import *
 
 class MapSprite:
-    def __init__(self, name, num_row_cl, num_col_cl):
+    def __init__(self, name, num_row_cel, num_col_cel):
         self.sprite_name = name
-        self.num_col_cl = num_col_cl
-        self.num_row_cl = num_row_cl
-
+        self.num_col_cel = num_col_cel
+        self.num_row_cel = num_row_cel
+        self.rect_cel = None
+        
 
     def draw(self):
-        
-        surf = Env.env.get_texture(self.sprite_name)
-        
-        positionX_pxl = Env.env.cell_width_pxl * self.num_col_cl
-        positionY_pxl = Env.env.cell_width_pxl * self.num_row_cl
-        Env.env.fenetre.blit( surf,(positionX_pxl, positionY_pxl)) 
+        self.rect_cel = Env.env.blit_cel(self.sprite_name, self.num_row_cl,self.num_col_cl)
