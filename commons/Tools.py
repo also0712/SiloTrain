@@ -16,13 +16,13 @@ def get_image(full_file_name, withAlpha):
         return image.convert()
     
 
-def is_in_rect(x_px, y_px , rect_px):
-    p1_x = rect_px[0]
-    p1_y = rect_px[1]
-    p2_x = rect_px[2]
-    p2_y = rect_px[3]
+def is_in_rect(x, y , rect):
+    p1_x = rect[0]
+    p1_y = rect[1]
+    p2_x = rect[2]
+    p2_y = rect[3]
     
-    if x_px < p1_x or y_px < p1_y or x_px > p2_x or y_px > p2_y:
+    if x < p1_x or y < p1_y or x > p2_x or y > p2_y:
         return False
     return True
 

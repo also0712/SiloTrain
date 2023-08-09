@@ -41,10 +41,7 @@ class Map:
             map_sprite_over_grounds = MapSprite(name, mine_x_cel, mine_y_cel)
             self.over_grounds.append(map_sprite_over_grounds)
             
-        
-        
     def draw(self):
-
 
         # ============== affichage des grounds ====================
         for sprite in self.grounds:
