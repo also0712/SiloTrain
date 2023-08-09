@@ -14,4 +14,4 @@ class MapSprite:
         
 
     def draw(self):
-        self.rect_cel = Env.env.blit_cel(self.sprite_name, self.num_row_cl,self.num_col_cl)
+        self.rect_cel = Env.env.blit_cel(self.sprite_name, self.num_row_cel,self.num_col_cel)
