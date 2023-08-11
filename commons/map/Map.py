@@ -13,6 +13,19 @@ class Map:
         self.grounds = []
         self.over_grounds = []
         
+
+    def generate_map_soil(self,texture_name):
+        
+        cpt_row_cel = 0
+        while cpt_row_cel < Env.env.map_width_cel:
+            cpt_col_cel = 0
+            while cpt_col_cel < Env.env.map_width_cel:               
+                map_sprite = MapSprite(texture_name, cpt_row_cel,cpt_col_cel )
+                self.grounds.append(map_sprite)
+                cpt_col_cel += 3
+            cpt_row_cel += 3
+    
+
     def auto_generate_map(self):
         
         # ================= auto génération des grounds =================
@@ -27,6 +40,9 @@ class Map:
                 self.grounds.append(map_sprite)
                 cpt_col_cel += 3
             cpt_row_cel += 3
+
+
+
         
         # ================== auto génération des over grounds ==============
         
@@ -41,13 +57,32 @@ class Map:
             map_sprite_over_grounds = MapSprite(name, mine_x_cel, mine_y_cel)
             self.over_grounds.append(map_sprite_over_grounds)
             
-    def draw(self):
+    def draw_grid(self,camera_cel):
+        num_row =0
+        line_color = (240, 240, 240)
+        
+        #lignes horizontales
+        while num_row < Env.env.map_height_cel :
+            Env.env.blit_line(line_color,0,num_row, Env.env.map_width_cel,num_row,camera_cel)
+            num_row+=1
 
+        #lignes verticales
+        num_col =0
+        while num_col < Env.env.map_width_cel :
+            Env.env.blit_line(line_color,num_col, 0,num_col, Env.env.map_height_cel,camera_cel)
+            num_col+=1
+
+
+    def draw(self, camera_cel):
         # ============== affichage des grounds ====================
         for sprite in self.grounds:
-            sprite.draw()
+            sprite.draw(camera_cel)
         for sprite in self.over_grounds:
-            sprite.draw()
+            sprite.draw(camera_cel)
+
+        self.draw_grid(camera_cel)
+
+
         
 
         

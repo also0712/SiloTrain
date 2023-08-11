@@ -13,12 +13,7 @@ class MainMenu:
         
         pygame.display.set_caption('SiloTrains - Menu')
         self.running=True
-        self.pressed_keys = {
-            1073741906 : False, #haut
-            1073741905 : False, #bas
-            1073741903 : False, #droite
-            1073741904 : False  #gauche
-        }
+
             
         
         self.menu_jouer = MenuElement()
@@ -58,13 +53,7 @@ class MainMenu:
             for event in pygame.event.get():
                 if event.type == QUIT:
                     return "QUIT"
-                elif event.type == pygame.KEYDOWN:
-                    self.pressed_keys[event.key] = True #ajoute au dictionnaire si n'existe pas
-                elif event.type == pygame.KEYUP:
-                    self.pressed_keys[event.key] = False 
-                    
-                if event.type == MOUSEWHEEL:
-                    Env.env.change_zoom(-event.precise_y)
+
                 if event.type == pygame.KEYDOWN:
                     if event.key == K_DOWN:
                         if self.quel_menu + 1 < len(self.list_menu):
@@ -76,21 +65,22 @@ class MainMenu:
                             keyboard_changed = True
                     elif event.key == K_RETURN :
                         return_key_pressed=True
+
                 if(event.type == pygame.MOUSEBUTTONDOWN and event.button == 1):
-                    return_key_pressed=True
+                    return_key_pressed=True                
+                
+                if event.type == MOUSEWHEEL:
+                    Env.env.change_zoom(-event.precise_y)
+                
                 mouse_x_px, mouse_y_px = pygame.mouse.get_pos()
                 
 
                 #======================calculs
-                
-               
                 if return_key_pressed :
                     for mnu in self.list_menu: #detection si les felche nous envoie sur un menu
                         if mnu.is_selected :
                             return mnu.text
 
-                
-                
                 for mnu in self.list_menu:
                     mnu.preparation()
                 
@@ -109,9 +99,9 @@ class MainMenu:
                             break
                 
             #=========================affichage
-            
-            self.map.draw()
-            self.draw_grid() 
+            camera_fixe = [0]*2
+            self.map.draw(camera_fixe)
+           
           
             for mnu in self.list_menu:
                 mnu.draw()
@@ -122,21 +112,7 @@ class MainMenu:
             
             
 
-    def draw_grid(self):
-        global _env
-        num_row =0
-        line_color = (240, 240, 240)
-        while num_row < Env.env.map_height_cel :
-            posY_pxl = num_row * Env.env.cell_width_pxl
-            pygame.draw.line(Env.env.fenetre, line_color, (0, posY_pxl), (Env.env.largeur_fenetre_pxl, posY_pxl))
-            num_row+=1
-
-        num_col =0
-        while num_col < Env.env.map_width_cel :
-            posX_pxl = num_col * Env.env.cell_width_pxl
-            pygame.draw.line(Env.env.fenetre, line_color, (posX_pxl,0), (posX_pxl,Env.env.hauteur_fenetre_pxl))
-            num_col+=1
-
+   
 
    
        

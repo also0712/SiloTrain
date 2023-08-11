@@ -73,11 +73,11 @@ class Environment:
             
             return self.textures[key_zoom]
     
-    def blit_cel(self, sprite_name, row_cel, col_cel):
+    def blit_cel(self, sprite_name, row_cel, col_cel, camera_cel):
 
         surf = self.get_texture(sprite_name)
-        positionX_pxl = self.cell_width_pxl * col_cel
-        positionY_pxl = self.cell_width_pxl * row_cel
+        positionX_pxl = self.cell_width_pxl * (col_cel - camera_cel[0])
+        positionY_pxl = self.cell_width_pxl * (row_cel - camera_cel[1])
         rect = self.fenetre.blit( surf,(int(positionX_pxl), int(positionY_pxl)))
 
         #conversion pix =>  cel
@@ -85,4 +85,15 @@ class Environment:
         p2_y_cel = row_cel + (rect[3]-rect[1]) / self.cell_width_pxl
         rect_cel = [col_cel,row_cel,p2_x_cel,p2_y_cel]
         return rect_cel
+    
+    def blit_line(self, line_color, p1_x_cel, p1_y_cel, p2_x_cel, p2_y_cel, camera_cel):
+
+        # conversion cel en pix + decalage camera
+        p1_x = self.cell_width_pxl * (p1_x_cel - camera_cel[0])
+        p1_y = self.cell_width_pxl * (p1_y_cel - camera_cel[1])
+        p2_x = self.cell_width_pxl * (p2_x_cel - camera_cel[0])
+        p2_y = self.cell_width_pxl * (p2_y_cel - camera_cel[1])
+
+
+        pygame.draw.line(env.fenetre, line_color, (p1_x, p1_y), (p2_x, p2_y))
         
